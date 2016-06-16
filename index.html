@@ -14,20 +14,16 @@
   </head>
   <body>
     <div class="wrapper">
+      <h1><center>Stratégies de reconstruction de génomes microbiens à partir de métagenomes</center></h1>
+      <hr />
       <header>
-        <h1>Jobim2016</h1>
-        <p>Stratégies de reconstruction de génomes microbiens à partir de métagenomes</p>
-
-        <p class="view"><a href="https://github.com/keuv-grvl/jobim2016">View the Project on GitHub <small>keuv-grvl/jobim2016</small></a></p>
-
 
         <ul>
          <li><a href="https://github.com/keuv-grvl/jobim2016">Voir sur <strong>GitHub</strong></a></li>
          <li><a href="https://github.com/keuv-grvl/jobim2016/raw/gh-pages/poster/poster-jobim2016-KGv3.pdf">Télécharger le <strong>poster</strong></a></li>
          <li><a href="https://github.com/keuv-grvl/jobim2016/tree/gh-pages/img">Voir les <strong>images</strong></a></li>
-
-
        </ul>
+
      </header>
      <section>
       <h2>
@@ -43,10 +39,14 @@
 
         <p>Le développement des méthodes de <i>binning</i> appliquées aux données métagénomiques est en plein essor. De nombreuses approches ont été envisagées (Sangwan et al., 2016 ; Soueidan et al., 2015), mais à l’heure actuelle aucun consensus ne s’est dégagé. Ce manque nous a conduit à évaluer les méthodes de <i>binning</i> existantes et à imaginer une nouvelle stratégie. Nous présenterons donc dans un premier temps une étude comparative à partir de jeux de données obtenues sur des communautés microbiennes artificielles de composition connue (e.g. : <a href="https://www.ebi.ac.uk/ena/data/view/SRR072232">SRR072232</a>, <a href="https://www.ebi.ac.uk/ena/data/view/SRR606249">SRR606249</a>). Dans un second temps, nous proposerons une stratégie originale de <i>binning</i>. Cette dernière intègre une caractérisation des séquences basée sur les "k-mers à trous" (spaced seed), des techniques d’extraction de données et de clustering issues du machine learning tout en exploitant les masses des données brutes et les connaissances existantes.</p>
 
+        <hr />
+
         <h2>
           <a id="etude-comparative-des-méthodes-de-<i>binning</i>" class="anchor" href="#etude-comparative-des-m%C3%A9thodes-de-<i>binning</i>" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Etude comparative des méthodes de <i>binning</i></h2>
 
           <p>Plusieurs grandes catégories de méthodes de <i>binning</i> existent : les méthodes basées sur la composition de séquences, les méthodes basées sur la co-abondance des séquences et les méthodes hybrides. Il est également nécessaire d’évaluer la fiabilité et les performances des différentes stratégies de <i>binning</i>. La robustesse du <i>binning</i> repose en partie sur la taille des séquences fournies. Les données sont préalablement assemblées en contigs à l’aide d’algorithmes éprouvés. Ces contigs sont alors caractérisés par l’un des critères suivants : (i) la fréquence de k-mers (avec généralement k=4), (ii) la co-abondance des séquences au travers de différents réplicats, (iii) d’une métrique construite pour intégrer (i) et (ii) à la fois. Optionnellement, on peut extraire de ces profils les informations pertinentes et ainsi réduire la complexité des données à traiter. Ces profils sont ensuite clusterisés afin de constituer les bins. Pour finir, les bins sont soumis à une validation sur des critères biologiques.</p>
+
+          <img src="matmet.png" alt="Matériel et méthodes"/>
 
           <p>TETRA (Teeling et al., 2004), pionnier dans l’approche basée sur la composition des séquences, se base sur la corrélation des motifs d’utilisation des tétranucléotides pour caractériser des séquences. Dick et al. (2009) ont exploité les travaux de Teeling et al. (2004) définir des clusters à l’aide d’une emergent self-organizing map. Par la suite, Nielsen et al. (2014) se basent sur la co-abondance des gènes dans de nombreux réplicats afin de regouper les séquences ayant des abondances similaires. D’autres méthodes hybrides ont émergé comme MetaBAT (Kang et al., 2015). Cette dernière exploite à la fois les fréquences des tétranucléotides et la co-abondance des séquences via une métrique empirique construite à l’aide de 1414 génomes bactériens complets. Les profils obtenus sont ensuite clusterisés avec un algorithme des k-medoids modifié afin de former les bins. Ding et al. (2015) ont proposé une approche basée sur des outils radicalement différents. Elle consiste à calculer la corrélation intrinsèque des nucléotides, à extraire les informations pertinentes de ces profils par une régression desmoindres carrés partiels (kernel partial least squares) puis à clustériser ces profils à l’aide d’une méthode de machine learning (machine à vecteurs de support, ou SVM).</p>
 
@@ -54,6 +54,7 @@
 
           <p>Bien que les méthodes de <i>binning</i> permettent de reconstruire des drafts de génomes à partir de données métagénomiques, le postulat initial repose sur l’homogénéité de la composition en nucléotide et/ou sur une profondeur de séquençage uniforme au sein des génomes. Cependant, cette homogénéité peut être perturbée par les nombreux transferts horizontaux entre micro-organismes potentiellement très éloignés phylogénétiquement (GarciaVallvé et al., 2000), voire également entre procaryote et eucaryote (Hotopp et al., 2007). Ces échanges de matériel génétique vont modifier la composition locale en nucléotides des génomes. Les séquences ainsi obtenues ne répondront plus au premier postulat des méthodes de <i>binning</i>. Il en est de même au sujet de la non-uniformité de la profondeur de séquençage (Peng et al., 2012). De plus, des portions de génomes hautement conservées (e.g. familles de gènes) peuvent être partagées par plusieurs individus. Il est alors difficile de les attribuer à un individu plutôt qu’à un autre. Il pourrait ainsi être pertinent de les attribuer aux deux en même temps. Nous avons conduit une comparaison approfondie de différents outils de <i>binning</i> couvrant un large panel de techniques. L’évaluation des outils existants repose sur les métagénomes artificiels et les méthodes d’évaluation précédemment décrits. Ces outils sont alors jugés sur la pertinence des résultats obtenus mais aussi sur les ressources informatiques nécessaires au traitement des données. Ce travail permet alors d’identifier les atouts et inconvénients de chaque méthode et de proposer une nouvelle approche de reconstruction de génomes microbiens à partir de métagénomes.</p>
 
+          <hr />
           <h2>
             <a id="approche-proposée--processus-itératif-de-reconstruction-de-génomes" class="anchor" href="#approche-propos%C3%A9e--processus-it%C3%A9ratif-de-reconstruction-de-g%C3%A9nomes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Approche proposée : processus itératif de reconstruction de génomes</h2>
 
@@ -61,12 +62,42 @@
 
             <p>Pour reconstruire des génomes microbiens à partir de métagénomes, la stratégie itérative suivante est proposée : (i) Les séquences sont caractérisées selon de multiples critères (e.g.: fréquences des k-mers, co-abondances des séquences, etc.) ; (ii) La complexité des données générées pourra être réduite par des techniques d’extraction de données ; (iii) Les profils établis sont clusterisés pour former des bins ; (iv) Chaque bin ainsi formé est assemblé indépendamment des autres en vue de reconstruire de plus grands fragments de composition homogène ; (v) Un second assemblage cross-bins permet ensuite d’assembler des séquences chevauchantes mais dont la composition diffère localement (e.g. bordure d’une portion provenant d’un transfert horizontal). Les bins dont deux séquences ont été assemblées sont alors fusionnés ; (vi) Chaque bin est évalué selon les modalités des outils existants. Si un bin rempli les critères de validation, il est alors extrait et ne participera pas à l’itération suivante ; (vii) Les séquences ayant été utilisées pour générer des contigs sont supprimées du pool initial de séquences et ces contigs sont placés dans ce pool afin de d’entamer un nouveau cycle.</p>
 
+            <img src="strat.png" alt="Stratégie alternative" />
+
+            <img src="2ndbinning.png" alt="Exemple"/>
+
             <p>Ce cycle se poursuit tant qu’il reste des séquences à traiter ou quand l’évaluation des bins (étape vi) produit de meilleurs résultats par rapport à l’itération précédente. Les régions uniformes en terme de composition ou de couverture sont alors correctement assemblées entre elles et des régions pourtant différentes en terme de composition et couverture peuvent aussi être assemblées. La caractérisation de séquences combine les différentes approches couramment utilisées pour la métagénomique non ciblée et de novo ainsi que l’approche basée sur les k-mers à trous (ou ”spaced seed ”) encore jamais appliquée pour ces études de novo . D’autres types de clustering seront testés comme le clustering ” flou ” permettantd’attribuer une même séquence à plusieurs bins. Les séquences communes à plusieurs espèces sont donc correctement attribuées. L’évaluation rigoureuse de ce clustering se basera sur des communautés artificielles précédemment décrites et se fera de la même manière que les outils précédemment testés. Le volume de données disponible imposera également l’utilisation de méthodes et architectures issues du Big Data, notamment avec l’utilisation d’Apache Spark. Ces outils permettent d’envisager la ré-analyse de grandes masses de données existantes.</p>
+
+            <hr />
+            <img src="logos.png" alt="logos"/>
+
+
           </section>
 
           <footer>
-            <p>This project is maintained by <a href="https://github.com/keuv-grvl">keuv-grvl</a></p>
-            <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+
+            <h2>JOBIM2016</h2>
+
+            <hr/>
+
+            <ul>
+<!--               <li><h3>Auteurs</h3></li> -->
+              <li>Kévin Gravouil <strong>«</strong></li>
+              <li>Corentin Hochart <strong>«</strong></li>
+              <li>Bérénice Batut <strong>«</strong></li>
+              <li>Clémence Defois <strong>«</strong></li>
+              <li>Cyrielle Gasc <strong>«</strong></li>
+              <li>Pierre Peyret <strong>«</strong></li>
+              <li>Didier Debroas <strong>«</strong></li>
+              <li>Marie Pailloux <strong>«</strong></li>
+              <li>Eric Peyretaillade <strong>«</strong></li>
+            </ul>
+
+            <hr/>
+
+            <!-- <hr /> -->
+            <img src="logos.png" alt="logos"/>
+
           </footer>
         </div>
         <script src="javascripts/scale.fix.js"></script>
