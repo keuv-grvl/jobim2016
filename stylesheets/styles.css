@@ -1,7 +1,7 @@
 
 @import url(https://fonts.googleapis.com/css?family=Poiret+One);
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
-@import url(https://fonts.googleapis.com/css?family=Antic);
+
 body {
   
   background-color: #fff;
@@ -176,7 +176,7 @@ header ul a strong {
 
 
 footer {
-  font-family: "Poiret One";
+  font-family: "Sawasdee", "Poiret One";
 }
 
 footer h2 {
